@@ -1,0 +1,88 @@
+1)DECLARE  
+   a integer := 15;  
+   b integer := 100;  
+   c integer;  
+   f real;  
+BEGIN  
+   c := a + b;  
+   dbms_output.put_line('Value of c: ' || c);  
+   f := 100.0/3.0;  
+   dbms_output.put_line('Value of f: ' || f);  
+END;  
+
+Value of c: 115
+Value of f: 33.33333333333333333333333333333333333333
+
+Statement processed.
+
+2)DECLARE  
+ -- Global variables   
+   num1 number := 50;   
+   num2 number := 10;   
+BEGIN   
+   dbms_output.put_line('Outer Variable num1: ' || num1);  
+   dbms_output.put_line('Outer Variable num2: ' || num2);  
+   DECLARE   
+      -- Local variables  
+      num1 number := 20;   
+      num2 number := 30;   
+   BEGIN   
+      dbms_output.put_line('Inner Variable num1: ' || num1);  
+      dbms_output.put_line('Inner Variable num2: ' || num2);  
+   END;   
+END;  
+/  
+
+Outer Variable num1: 50
+Outer Variable num2: 10
+Inner Variable num1: 20
+Inner Variable num2: 30
+
+Statement processed.
+
+3)CREATE TABLE CUSTOMERS( 
+   ID   INT NOT NULL, 
+   NAME VARCHAR (20) NOT NULL, 
+   AGE INT NOT NULL, 
+   ADDRESS CHAR (25), 
+   SALARY   DECIMAL (18, 2),        
+   PRIMARY KEY (ID) 
+);  
+
+Table created.
+
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) 
+VALUES (1, 'naveen', 23, 'banglre', 50000 );  
+
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) 
+VALUES (2, 'varun', 20, 'hyderabad', 25000);  
+
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) 
+VALUES (3, 'harsha', 23, 'chennai', 20000 );
+  
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) 
+VALUES (4, 'kavya', 25, 'rajampet', 15000 ); 
+ 
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) 
+VALUES (5, 'charan', 40, 'kadapa', 32000 );  
+
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY) 
+VALUES (6, 'tanuja', 22, 'tirupati', 30000 ); 
+
+DECLARE 
+   c_id customers.id%type := 1; 
+   c_name  customers.name%type; 
+   c_addr customers.address%type; 
+   c_sal  customers.salary%type; 
+BEGIN 
+   SELECT name, address, salary INTO c_name, c_addr, c_sal 
+   FROM customers 
+   WHERE id = c_id;  
+   dbms_output.put_line 
+   ('Customer ' ||c_name || ' from ' || c_addr || ' earns ' || c_sal); 
+END; 
+/  
+
+Customer kavya from rajampet earns 15000  
+
+PL/SQL procedure completed successfully
